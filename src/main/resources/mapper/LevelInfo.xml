@@ -5,11 +5,17 @@
 <mapper namespace="SQL.LEVELINFO">
   <select id="selectLevelInfo" resultType="li"> <!-- vo패키지 안에 Alias가 li라고 된 것을 가져옴 -->
     select * from level_info
+    <where>
+	<if test="liname!=null">liname like '%' || #{liname} || '%'</if>
+	<if test="linum!=null">linum = #{linum}</if>    	
+    </where>
   </select>
+  
   <insert id="insertLevelInfo" parameterType="li">
   insert into level_info(linum,lilevel,liname,lidesc)
   values (seq_linum.nextval, #{lilevel},#{liname},#{lidesc})
   </insert>
+  
   <update id="updateLevelInfo" parameterType="li">
   update level_info 
   	<set>
@@ -19,6 +25,7 @@
   	</set>
   	where linum=#{linum}
   </update>
+  
   <delete id="deleteLevelInfo" parameterType="li">
   delete level_info
   where linum=#{linum}
