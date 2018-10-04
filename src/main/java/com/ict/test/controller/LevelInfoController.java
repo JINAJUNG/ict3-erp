@@ -33,7 +33,7 @@ public class LevelInfoController {
 	
 	@RequestMapping(value="/levelview",method=RequestMethod.GET)
 	public String viewLevel(Model m, @ModelAttribute LevelInfo li ) {/*HttpServletRequest request, @RequestParam Map<String,String> map,@RequestParam("lilevel") Integer lilevel (request,map,단일로 getparam받아오는 방법)*/
-		m.addAttribute("list", ls.getLevel(li));
+		m.addAttribute("lev", ls.getLevel(li));
 		return "level/levelview";
 	} 
 	
