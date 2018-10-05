@@ -35,7 +35,7 @@
 	
 	
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="dataSource" ref="hikariDataSource"/>
+		<property name="dataSource" ref="dataSourceProxy"/>
 		<property name="configLocation" value="classpath:config/mybatis.xml"/>
 		<property name="mapperLocations" value="classpath:mapper/*.xml"/>
 	</bean>

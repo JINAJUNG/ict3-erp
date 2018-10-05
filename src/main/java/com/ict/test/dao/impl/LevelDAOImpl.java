@@ -26,8 +26,22 @@ public class LevelDAOImpl implements LevelDAO{
 	}
 
 	@Override
-	public LevelInfo selectLevel(LevelInfo li) {
-		return sst.selectOne("SQL.LEVELINFO.selectLevelInfo", li);
+	public LevelInfo selectLevel(Integer linum) {
+		LevelInfo l = new LevelInfo();
+		l.setLinum(linum);
+		return sst.selectOne("SQL.LEVELINFO.selectLevelInfo", linum);
+	}
+
+	@Override
+	public Integer updateLevel(LevelInfo li) {
+		return sst.update("SQL.LEVELINFO.updateLevelInfo", li);
+	}
+
+	@Override
+	public Integer deleteLevel(Integer linum) {
+		LevelInfo l = new LevelInfo();
+		l.setLinum(linum);
+		return sst.delete("SQL.LEVELINFO.deleteLevelInfo",linum);
 	}
 
 }

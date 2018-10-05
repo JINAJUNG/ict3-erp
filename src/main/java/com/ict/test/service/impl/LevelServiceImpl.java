@@ -24,20 +24,23 @@ public class LevelServiceImpl implements LevelService{
 	}
 
 	@Override
-	public Map<String,Object> insertLevel(LevelInfo li) {
-		int cnt =ldao.insertLevel(li);
-		Map<String, Object> map = new HashMap<>();
-		map.put("cnt", cnt);
-		map.put("msg", "fail");
-		if(cnt==1) {
-			map.put("msg","success");
-		}
-		return map;
+	public Integer insertLevel(LevelInfo li) {
+		return ldao.insertLevel(li);
 	}
 
 	@Override
-	public LevelInfo getLevel(LevelInfo li) {
-		return ldao.selectLevel(li);
+	public LevelInfo getLevel(Integer linum) {
+		return ldao.selectLevel(linum);
+	}
+
+	@Override
+	public Integer updateLevel(LevelInfo li) {
+		return ldao.updateLevel(li);
+	}
+
+	@Override
+	public Integer deleteLevel(Integer linum) {
+		return ldao.deleteLevel(linum);
 	}
 
 }

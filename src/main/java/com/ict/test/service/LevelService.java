@@ -8,6 +8,8 @@ import com.ict.test.vo.LevelInfo;
 public interface LevelService {
 
 	public List<LevelInfo> getLevelList(LevelInfo li);
-	public LevelInfo getLevel(LevelInfo li);
-	public Map<String,Object> insertLevel(LevelInfo li);
+	public LevelInfo getLevel(Integer li);
+	public Integer insertLevel(LevelInfo li);
+	public Integer updateLevel(LevelInfo li);
+	public Integer deleteLevel(Integer linum);
 }
