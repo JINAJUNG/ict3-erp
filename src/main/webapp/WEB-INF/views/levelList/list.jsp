@@ -27,7 +27,7 @@
 		var xhr = new XMLHttpRequest();
 		var url = conf.url;
 		var method = conf.method?conf.method:'GET';
-		var param = conf.param;
+		var param = conf.params;
 		
 		var success = conf.success?conf.success:function(res){
 			alert(res);
@@ -46,8 +46,11 @@
 			}
 		}
 		xhr.open(method,url);
+		if(method!='GET'){
+			xhr.setRequestHeader('Content-type','application/json;charset=utf-8');
+		}
 		this.send = function(){
-			xhr.send();
+			xhr.send(param);
 		}
 	}
 	 window.addEventListener('load',function(){
@@ -57,12 +60,12 @@
 					res = JSON.parse(res);
 					var html = '';
 					for(var li of res){
-						html += '<tr>';
+						html += '<tr id="lv'+li.linum+'">';
 						html += '<td>' + li.linum + '</td>';
-						html += '<td>' + li.lilevel + '</td>';
-						html += '<td>' + li.liname + '</td>';
-						html += '<td>' + li.lidesc + '</td>';
-						html += '<td><button>수정</button><button>삭제</button></td>';
+						html += '<td><input type="text" id="lilevel'+li.linum+'" value="' + li.lilevel + '"></td>';
+						html += '<td><input type="text" id="liname'+li.linum+'" value="' + li.liname + '"></td>';
+						html += '<td><input type="text" id="lidesc'+li.linum+'" value="' + li.lidesc + '"></td>';
+						html += '<td><button onclick="updateLevelInfo('+li.linum+')">수정</button><button onclick="deleteLevelInfo('+li.linum+')">삭제</button></td>';
 						html += '</tr>';
 					} 
 					document.querySelector('#libody').insertAdjacentHTML('beforeend',html);
@@ -91,7 +94,85 @@
 
 		</tbody>
 	</table>
+	<button onclick ="addLevelInfo()">레벨추가</button>
 	<script>
+
+	function updateLevelInfo(linum){
+		var lilevel = document.querySelector("#lilevel" + linum ).value;
+		var liname = document.querySelector("#liname" + linum).value;
+		var lidesc = document.querySelector("#lidesc" + linum).value;
+		var params = {lilevel:lilevel, liname:liname, lidesc:lidesc, linum:linum};
+		params = JSON.stringify(params);
+		
+
+		var conf = {
+				url : '/ict3/levelList/'+linum,
+				method : 'PUT',
+				params : params,
+				success : function(res){
+					alert(res);
+				}
+		}
+		var au = new AjaxUtil(conf);
+		au.send();
+
+		alert(lilevel + "," + liname + "," +lidesc);
+	}
+	
+/* 	var del = document.querySelector('#del');
+	del.onclick = function(){
+		
+	} */
+	function deleteLevelInfo(linum){
+		var conf = {
+				url : '/ict3/levelList/'+linum,
+				method : 'DELETE',
+				success : function(res){
+					alert(res);
+					location.href='/ict3/url/levelList:list';
+				}
+		}
+		var au = new AjaxUtil(conf);
+		au.send();
+	}
+	
+	function addLevelInfo(){
+			var html = '<tr>';
+			html += '<td> &nbsp;</td>';
+			html += '<td><input type="text" id="lilevel" value=""></td>';
+			html += '<td><input type="text" id="liname" value=""></td>';
+			html += '<td><input type="text" id="lidesc" value=""></td>';
+			html += '<td><button onclick="saveLevelInfo()">등록</button></td>';
+			html += '</tr>';
+		document.querySelector('#libody').insertAdjacentHTML('beforeend',html);
+	}
+	function saveLevelInfo(){
+
+		var lilevel = document.querySelector("#lilevel").value;
+		var liname = document.querySelector("#liname").value;
+		var lidesc = document.querySelector("#lidesc").value;
+		var params = {lilevel:lilevel, liname:liname, lidesc:lidesc};
+		params = JSON.stringify(params);
+		
+
+		var conf = {
+				url : '/ict3/levelList/',
+				method : 'POST',
+				params : params,
+				success : function(res){
+					if(res=='1'){
+						alert('저장완료');
+						location.href='/ict3/url/levelList:list';
+					}
+				}
+		}
+		var au = new AjaxUtil(conf);
+		au.send();
+
+		alert(lilevel + "," + liname + "," +lidesc);
+	
+	}
+	/* ------------------------------------------------------------- */
 	var searchbtn = document.querySelector('#searchbtn');
 	searchbtn.addEventListener('click',function(){
 		 var conf = {
