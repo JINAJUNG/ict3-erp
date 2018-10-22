@@ -18,14 +18,16 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.ict.test.service.LevelService;
+import com.ict.test.service.impl.LevelServiceImpl;
 import com.ict.test.vo.LevelInfo;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("file:./src/main/webapp/WEB-INF/spring/root-context.xml") //test/resources에 파일을 넣으 경우
+@ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml") //test/resources에 파일을 넣으 경우
 //@ContextConfiguration("file:./src/main/webapp/WEB-INF/spring/root-context.xml") test/resources에 파일을 넣지 않은 경우 경로를 다 주어야 한다.
 public class DataSourceTest {
-
+	
 	@Autowired
 	@Qualifier("dataSourceProxy")
 	private DataSource ds;
@@ -62,29 +64,29 @@ public class DataSourceTest {
 		List<LevelInfo> list= ss.selectList("SQL.LEVELINFO.selectLevelInfo");
 		assertEquals(list.size(), 4);
 	}
-
-	@Test
-	public void insertTest() {
-		LevelInfo li = new LevelInfo();
-		li.setLilevel(4);
-		li.setLiname("test");
-		li.setLidesc("test데이터");
-	//	assertEquals(ss.insert("SQL.LEVELINFO.insertLevelInfo",li), 1);
-	}
-	
-	@Test
-	public void updateTest() {
-		LevelInfo li = new LevelInfo();
-		li.setLinum(21);
-		li.setLiname("update test");
-		li.setLidesc("update test데이터");
-	//	assertEquals(ss.update("SQL.LEVELINFO.updateLevelInfo", li), 1);
-	}
-	
-	@Test
-	public void deleteTest() {
-		LevelInfo li = new LevelInfo();
-		li.setLinum(21);
-		assertEquals(ss.delete("SQL.LEVELINFO.deleteLevelInfo", li), 1);
-	}
+//
+//	@Test
+//	public void insertTest() {
+//		LevelInfo li = new LevelInfo();
+//		li.setLilevel(4);
+//		li.setLiname("test");
+//		li.setLidesc("test데이터");
+//	//	assertEquals(ss.insert("SQL.LEVELINFO.insertLevelInfo",li), 1);
+//	}
+//	
+//	@Test
+//	public void updateTest() {
+//		LevelInfo li = new LevelInfo();
+//		li.setLinum(21);
+//		li.setLiname("update test");
+//		li.setLidesc("update test데이터");
+//	//	assertEquals(ss.update("SQL.LEVELINFO.updateLevelInfo", li), 1);
+//	}
+//	
+//	@Test
+//	public void deleteTest() {
+//		LevelInfo li = new LevelInfo();
+//		li.setLinum(21);
+//		assertEquals(ss.delete("SQL.LEVELINFO.deleteLevelInfo", li), 1);
+//	}
 }

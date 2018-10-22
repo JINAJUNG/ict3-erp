@@ -23,6 +23,7 @@ public class LevelInfoController {
 	
 	@RequestMapping(value="/levelList", method=RequestMethod.GET) //method와 1:1맵핑  value는 같아도 되는데 method 까지 같은게 두개가 되면 err
 	public @ResponseBody List<LevelInfo> getLevelList(@ModelAttribute LevelInfo li){//form data방식이어야함
+		System.out.println(ls.getLevelList(li));
 		return ls.getLevelList(li);
 	}
 	

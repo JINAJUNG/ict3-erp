@@ -1,7 +1,9 @@
 package com.ict.test.vo;
 
 import org.apache.ibatis.type.Alias;
+import org.springframework.stereotype.Component;
 
+@Component
 @Alias("li")
 public class LevelInfo {
 	private Integer linum;

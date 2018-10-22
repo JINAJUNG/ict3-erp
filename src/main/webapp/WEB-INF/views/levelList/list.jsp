@@ -22,7 +22,6 @@
 		alert(libody);
 		alert('나 서버 갓다오는 아이')
 	} */
-
 	var AjaxUtil = function(conf){
 		var xhr = new XMLHttpRequest();
 		var url = conf.url;
@@ -50,12 +49,12 @@
 			xhr.setRequestHeader('Content-type','application/json;charset=utf-8');
 		}
 		this.send = function(){
-			xhr.send(param);
+			xhr.send();
 		}
 	}
 	 window.addEventListener('load',function(){
 		var conf = {
-				url : '/ict3/levelList',
+				url : '/ict3-erp/levelList',
 				success : function(res){
 					res = JSON.parse(res);
 					var html = '';
@@ -106,7 +105,7 @@
 		
 
 		var conf = {
-				url : '/ict3/levelList/'+linum,
+				url : '/ict3-erp/levelList/'+linum,
 				method : 'PUT',
 				params : params,
 				success : function(res){
@@ -125,11 +124,11 @@
 	} */
 	function deleteLevelInfo(linum){
 		var conf = {
-				url : '/ict3/levelList/'+linum,
+				url : '/ict3-erp/levelList/'+linum,
 				method : 'DELETE',
 				success : function(res){
 					alert(res);
-					location.href='/ict3/url/levelList:list';
+					location.href='/ict3-erp/url/levelList:list';
 				}
 		}
 		var au = new AjaxUtil(conf);
@@ -156,13 +155,13 @@
 		
 
 		var conf = {
-				url : '/ict3/levelList/',
+				url : '/ict3-erp/levelList/',
 				method : 'POST',
 				params : params,
 				success : function(res){
 					if(res=='1'){
 						alert('저장완료');
-						location.href='/ict3/url/levelList:list';
+						location.href='/ict3-erp/url/levelList:list';
 					}
 				}
 		}
@@ -176,7 +175,7 @@
 	var searchbtn = document.querySelector('#searchbtn');
 	searchbtn.addEventListener('click',function(){
 		 var conf = {
-					url : '/ict3/levelList/'+document.querySelector('input[name=liname]').value,
+					url : '/ict3-erp/levelList/'+document.querySelector('input[name=liname]').value,
 					success : function(res){
 						res = JSON.parse(res);
 						var html = '';
