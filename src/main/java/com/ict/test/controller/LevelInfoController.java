@@ -20,6 +20,10 @@ public class LevelInfoController {
 	@Autowired
 	private LevelService ls;
 	
+	@RequestMapping(value="/linum", method=RequestMethod.GET)
+	public @ResponseBody Integer getLinum(){ //무조건 {} url path에 대한 valriable
+		return ls.selectlinum();
+	}
 	
 	@RequestMapping(value="/levelList", method=RequestMethod.GET) //method와 1:1맵핑  value는 같아도 되는데 method 까지 같은게 두개가 되면 err
 	public @ResponseBody List<LevelInfo> getLevelList(@ModelAttribute LevelInfo li){//form data방식이어야함
@@ -41,7 +45,7 @@ public class LevelInfoController {
 
 	@RequestMapping(value="/levelList/{linum}", method=RequestMethod.PUT)
 	@ResponseBody 
-	public Integer updateLevel(@RequestBody LevelInfo li, @PathVariable Integer linum){
+	public Integer updateLevel(/*@RequestBody */@ModelAttribute LevelInfo li, @PathVariable Integer linum){
 		li.setLinum(linum);
 		return ls.updateLevel(li);
 	}

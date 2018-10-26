@@ -41,7 +41,7 @@ public class UserT {
 	@Test
 	public void inTest() {
 		li.setLiname("lsTest");
-		li.setLilevel(2);
+		li.setLilevel(3);
 		li.setLidesc("lsSeTest");
 		assertEquals(1, (int)ls.insertLevel(li));
 	}

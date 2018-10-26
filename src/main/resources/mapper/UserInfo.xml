@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="SQL.USERINFO">
+	<select id="selectUser" resultType="ui" parameterType="ui">
+		select * from user_info
+		<where>
+			<if test="uinum!=null">uinum = #{uinum}</if>
+		</where>
+	</select>
+	<insert id="inserUser" parameterType="li">
+		insert into user_info(uinum,uiname,uiid,uipwd,uidesc)
+		values (seq_uinum.nextval, #{uiname},#{uiid},#{uipwd}
+		<where>
+			<if test="uidesc!=null">,#{uidesc}</if>
+		</where>
+		)
+	</insert>
+	<update id="updateUser" parameterType="li">
+		update level_info
+		<set>
+			<if test="uiname!=null">uiname=#{uiname},</if>
+			<if test="uiid!=null">uiid=#{uiid},</if>
+			<if test="uipwd!=null">uipwd=#{uipwd},</if>
+			<if test="uidesc!=null">uidesc=#{uidesc},</if>
+		</set>
+		where uinum=#{uinum}
+	</update>
+
+	<delete id="deleteUser" parameterType="li">
+		delete level_info
+		where linum=#{linum}
+	</delete>
+</mapper>

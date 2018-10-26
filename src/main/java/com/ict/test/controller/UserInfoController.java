@@ -23,7 +23,7 @@ import com.ict.test.vo.UserInfo;
 public class UserInfoController {
 	@Autowired
 	private UserService us;
-	
+
 	@RequestMapping(value = "/userinfo", method = RequestMethod.GET)
 	@ResponseBody
 	public List<UserInfo> selectResellList(@ModelAttribute UserInfo ui) {
@@ -38,17 +38,15 @@ public class UserInfoController {
 		return us.selectUser(ui);
 	}
 
-	@RequestMapping(value="/userinfo",method=RequestMethod.POST)
-	public @ResponseBody Integer insertResell(@ModelAttribute UserInfo ui){
-		
-		return  us.insertUser(ui);
+	@RequestMapping(value = "/userinfo", method = RequestMethod.POST)
+	public @ResponseBody Integer insertResell(@ModelAttribute UserInfo ui) {
+
+		return us.insertUser(ui);
 	}
 
 	@RequestMapping(value = "/userinfo/{uinum}", method = RequestMethod.PUT)
-	public @ResponseBody Integer updateResell(@PathVariable Integer uinum,@RequestBody UserInfo ui) throws IllegalStateException, IOException {
-
+	public @ResponseBody Integer updateResell(@PathVariable Integer uinum, @RequestBody UserInfo ui) {
 		ui.setUinum(uinum);
-
 		return us.updateUser(ui);
 	}
 

@@ -43,4 +43,9 @@ public class LevelServiceImpl implements LevelService{
 		return ldao.deleteLevel(linum);
 	}
 
+	@Override
+	public Integer selectlinum() {
+		return ldao.selectlinum();
+	}
+
 }

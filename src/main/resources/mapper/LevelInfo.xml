@@ -2,35 +2,41 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
-  <!-- <where>태그가 있으면 linum이나 변수 하나만 넘길 수 없고 쓰지않고 where로 하나만비교하는 delete나 update같은 경우는 가능ㅎ다. -->
-  <!-- <where>는 mybatis tag http://aljjabaegi.tistory.com/310태그정리-->
+
+<!-- <where>태그가 있으면 linum이나 변수 하나만 넘길 수 없고 쓰지않고 where로 하나만비교하는 delete나 update같은 
+	경우는 가능ㅎ다. -->
+<!-- <where>는 mybatis tag http://aljjabaegi.tistory.com/310태그정리 -->
 <mapper namespace="SQL.LEVELINFO">
-  <select id="selectLevelInfo" resultType="li" parameterType="li"> <!-- vo패키지 안에 Alias가 li라고 된 것을 가져옴 -->
-    select * from level_info
-    <where>
-	<if test="liname!=null">liname like '%' || #{liname} || '%'</if>
-	<if test="linum!=null">linum = #{linum}</if>
-    </where>
-  </select>
-  
-  <insert id="insertLevelInfo" parameterType="li">
-  insert into level_info(linum,lilevel,liname,lidesc)
-  values (seq_linum.nextval, #{lilevel},#{liname},#{lidesc})
-  </insert>
-  
-  <update id="updateLevelInfo" parameterType="li">
-  update level_info 
-  	<set>
-  		<if test="lilevel!=null">lilevel=#{lilevel},</if>
-  		<if test="liname!=null">liname=#{liname},</if>
-  		<if test="lidesc!=null">lidesc=#{lidesc},</if>
-  	</set>
-  	where linum=#{linum}
-  </update>
-  
-  <delete id="deleteLevelInfo" parameterType="li">
-  delete level_info
-  where linum=#{linum}
-  </delete>
+	<select id="selectLevelInfo" resultType="li"> <!-- vo패키지 안에 Alias가 li라고 된 것을 가져옴 -->
+		select * from level_info order by linum
+	</select>
+	<select id="selectLevelInfo2" resultType="li" parameterType="li">
+		select * from level_info
+		<where>
+			<if test="linum!=null">linum = #{linum}</if>
+		</where>
+	</select>
+	<select id="selectlinum" resultType="int">
+		select seq_linum.nextval as linum from dual
+	</select>
+
+	<insert id="insertLevelInfo" parameterType="li">
+		insert into level_info(linum,lilevel,liname,lidesc)
+		values (seq_linum.nextval, #{lilevel},#{liname},#{lidesc})
+	</insert>
+
+	<update id="updateLevelInfo" parameterType="li">
+		update level_info
+		<set>
+			<if test="lilevel!=null">lilevel=#{lilevel},</if>
+			<if test="liname!=null">liname=#{liname},</if>
+			<if test="lidesc!=null">lidesc=#{lidesc},</if>
+		</set>
+		where linum=#{linum}
+	</update>
+
+	<delete id="deleteLevelInfo" parameterType="li">
+		delete level_info
+		where linum=#{linum}
+	</delete>
 </mapper>

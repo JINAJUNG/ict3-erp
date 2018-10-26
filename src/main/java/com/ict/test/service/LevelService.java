@@ -12,4 +12,5 @@ public interface LevelService {
 	public Integer insertLevel(LevelInfo li);
 	public Integer updateLevel(LevelInfo li);
 	public Integer deleteLevel(Integer linum);
+	public Integer selectlinum();
 }

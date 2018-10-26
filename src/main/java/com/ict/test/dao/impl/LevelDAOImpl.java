@@ -44,4 +44,9 @@ public class LevelDAOImpl implements LevelDAO{
 		return sst.delete("SQL.LEVELINFO.deleteLevelInfo",linum);
 	}
 
+	@Override
+	public Integer selectlinum() {
+		return sst.selectOne("SQL.LEVELINFO.selectlinum");
+	}
+
 }

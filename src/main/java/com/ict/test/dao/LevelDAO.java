@@ -10,4 +10,5 @@ public interface LevelDAO {
 	public LevelInfo selectLevel(Integer linum);
 	public Integer updateLevel(LevelInfo li);
 	public Integer deleteLevel(Integer linum);
+	public Integer selectlinum();
 }
